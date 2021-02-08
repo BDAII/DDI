@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-该程序是采用LSTM_GCN框架训练RNN模型的代码
-output: xxx
-"""
 import tensorflow as tf
 import pandas as pd
 import numpy as np
@@ -14,19 +10,13 @@ import gc
 hident_size = 512
 
 
-def get_data(file_path, item):
-    L = set(range(1, 6))
-    item_set = set([item])
-    L = list(L - item_set)
-
+def get_data(train_data_path, test_data_path):
     train_data = []
-    for i in L:
-        print(i)
-        train_data.append(np.load(file_path + "data_set_" + str(i) + ".npy", allow_pickle=True))
+    train_data.append(np.load(train_data_path, allow_pickle=True))
 
     train_data = np.vstack(train_data)
 
-    test_data = np.load(file_path + "data_set_" + str(item) + ".npy", allow_pickle=True)
+    test_data = np.load(test_data_path, allow_pickle=True)
 
     train_feature = train_data[:, :hident_size * 2].reshape((-1, 2, hident_size))
     train_feature = np.stack((train_feature[:, 1, :], train_feature[:, 0, :]), axis=1)
@@ -63,7 +53,7 @@ class data_set():
 class MLNN():
     def __init__(self, feature_layer, feature_dim, rnn_unit, rnn_number, label_dim):
 
-        # 定义占位符
+
         self.feature = tf.placeholder(dtype=tf.float32, shape=[None, 2, feature_dim])
         self.label = tf.placeholder(dtype=tf.float32, shape=[None, label_dim])
         self.dropout = tf.placeholder_with_default(0., shape=())
@@ -81,7 +71,7 @@ class MLNN():
         outputs = tf.transpose(outputs, [1, 0, 2])
         self.outputs = tf.concat([outputs[0], outputs[1]], axis=1)
 
-    # 权重初始化
+
     def weights_bias_init(self, encorder_layers, name_pref):
         feature_weights = []
         feature_bias = []
@@ -94,7 +84,6 @@ class MLNN():
 
         return feature_weights, feature_bias
 
-    # 前向传播
     def forward(self, feature, weights, bias):
         for i in range(len(weights) - 1):
             feature = tf.nn.selu(tf.add(tf.matmul(feature, weights[i]), bias[i]))
@@ -127,7 +116,6 @@ class MLNN():
         loss = tf.reduce_sum(loss)
         return loss
 
-    # 反向传播的loss
 
     def get_MSE(self, predict):
         predict_loss = tf.reduce_sum((predict - self.label) ** 2) / 2
@@ -207,17 +195,13 @@ loss_train = []
 best_metric = [0, 0, 0, 0]
 if __name__ == "__main__":
 
-    open_file = "/home/moshenglong/drug_9/step_7_5fold/GCN_AE_40_edge/"
-    save_path = "/home/moshenglong/drug_9/step_7_5fold/LSTM_GCN/model/model_"
-    part = int(sys.argv[1])
+    train_data_path = str(sys.argv[1])
+    test_data_path = str(sys.argv[2])
+    save_path = "../../result/model/model_"
     ##############
-    train_X, train_Y, test_X, test_Y = get_data(open_file, part)
-
+    train_X, train_Y, test_X, test_Y = get_data(train_data_path, test_data_path)
     N = train_X.shape[0]
-
-    print(train_X.shape)
     dataset = data_set(train_X, train_Y, BATCH_SIZE)
-    print(test_X.shape, test_Y.shape)
     del train_X, train_Y
     gc.collect()
 
@@ -257,7 +241,7 @@ if __name__ == "__main__":
 
                 if temp_f1[0] > best_metric[0]:
                     best_metric = temp_f1
-                    saver.save(sess, save_path + str(part) + "/model_cv")
+                    saver.save(sess, save_path + "/model_cv")
 
         print("====iteration  last======:strain_loss:%0.3f;" % (train_loss))
         print("best_metric:", best_metric)

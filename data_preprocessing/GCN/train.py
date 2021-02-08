@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-该程序是用GCN框架进行数据预处理的代码
-output: xxx
-"""
 
 import time
 import tensorflow as tf
@@ -32,20 +28,15 @@ def get_spare_connect_matrix(W, K):
 
 
 def load_data(K=40):
-    label = pd.read_csv(
-        "/home/moshenglong/drug_9/step_3_clustring/clustring_result/morgn_struct_Dice_sp_consen_label.csv", index_col=0)
+    label = pd.read_csv("../../data/morgn_struct_Dice_sp_consen_label.csv", index_col=0)
 
     label_index = list(label.index)
     label = label.values
     morgn_fp = \
-    pd.read_csv("/home/moshenglong/drug_three_step/step_2_similarity_Tan/FP_Data/morgn_FP.csv", index_col=0).loc[
-        label_index].values
+    pd.read_csv("../../data/morgn_FP.csv", index_col=0).loc[label_index].values
     feature = \
-    pd.read_csv("/home/moshenglong/drug_three_step/four_cell_data_set/csv_Data/PC3_gen_data.csv", index_col=0).loc[
-        label_index].values
-
-    # adj_path = "/home/moshenglong/drug_9/step_4_fusion/SNF_gen_struct_Dice_similarity.csv"
-    adj_path = "/home/moshenglong/drug_8/drug_5819_similarity/morgn_struct_Dice.csv"
+    pd.read_csv("../../data/PC3_gen_data.csv", index_col=0).loc[label_index].values
+    adj_path = "../../data/morgn_struct_Dice.csv"
     sim = get_spare_connect_matrix(pd.read_csv(adj_path, index_col=0).loc[label_index, label_index].values, K)
     # sim = pd.read_csv(adj_path,index_col=0).loc[label_index,label_index].values
     sim_comb = [sim]

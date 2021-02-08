@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sat Nov 30 14:02:04 2019
-
-@author: msl
-"""
 import tensorflow as tf
 from inits import glorot, zeros
 

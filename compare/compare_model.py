@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
-"""
-该程序是将 MLARAM, MLkNN, BRkNNaClassifier, BRkNNbClassifier四种模型进行对比的代码
-output: xxx
-"""
 import pandas as pd
 import numpy as np
 from sklearn.utils import resample
 from sklearn.model_selection import train_test_split
 from skmultilearn.adapt import MLARAM, MLkNN, BRkNNaClassifier, BRkNNbClassifier, MLTSVM
+from sklearn.ensemble import RandomForestClassifier
 
 from sklearn.metrics import f1_score, confusion_matrix, precision_score, recall_score
 import gc
@@ -15,19 +12,14 @@ import gc
 hident_size = 512 * 2
 
 
-def get_data(file_path, item):
-    L = set(range(1, 6))
-    item_set = set([item])
-    L = list(L - item_set)
+def get_data(train_data_path, test_data_path):
 
     train_data = []
-    for i in L:
-        print(i)
-        train_data.append(np.load(file_path + "data_set_" + str(i) + ".npy", allow_pickle=True))
+    train_data.append(np.load(train_data_path, allow_pickle=True))
 
     train_data = np.vstack(train_data)
 
-    test_data = np.load(file_path + "data_set_" + str(item) + ".npy", allow_pickle=True)
+    test_data = np.load(test_data_path, allow_pickle=True)
 
     return train_data[:, :hident_size], train_data[:, hident_size:].astype(int), test_data[:, :hident_size], test_data[
                                                                                                              :,
@@ -35,12 +27,21 @@ def get_data(file_path, item):
         int)
 
 
-def ML_model_predict(train_x, train_y, test_x):
-    # classifier = MLARAM(threshold=0.2)
-    # classifier = MLkNN()
-    # classifier = BRkNNaClassifier()
-    # classifier = BRkNNbClassifier()
-    classifier = MLTSVM(c_k=2 ** -1)
+def ML_model_predict(train_x, train_y, test_x, model_name):
+    print(f"--------train {model_name} model----------")
+    classifier = None
+    if model_name == "MLARAM":
+        classifier = MLARAM(threshold=0.2)
+    elif model_name == "MLkNN":
+        classifier = MLkNN()
+    elif model_name == "BRkNNa":
+        classifier = BRkNNaClassifier()
+    elif model_name == "BRkNNb":
+        classifier = BRkNNbClassifier()
+    elif model_name == "RF":
+        classifier = RandomForestClassifier(n_estimators=1000, random_state=0, n_jobs=-1)
+    elif model_name == "MLTSVM":
+        classifier = MLTSVM(c_k=2 ** -1)
     classifier.fit(train_x, train_y)
     prediction = classifier.predict(test_x)
     return prediction
@@ -82,18 +83,20 @@ import sys
 loss_train = []
 best_metric = [0, 0, 0, 0]
 if __name__ == "__main__":
-    open_file = "/home/moshenglong/drug_9/step_7_5fold/GCN_AE_40_edge/"
-    # save_path = "/home/moshenglong/drug_9/step_7_5fold/GCN_clustring/model/model_"
-    part = int(sys.argv[1])
-    ##############
-    train_X, train_Y, test_X, test_Y = get_data(open_file, part)
+    train_data_path = str(sys.argv[1])
+    test_data_path = str(sys.argv[1])
+
+    train_X, train_Y, test_X, test_Y = get_data(train_data_path, test_data_path)
     print(type(train_X))
     print(train_X.shape, train_Y.shape)
     print(test_X.shape, test_Y.shape)
-
-    predict = ML_model_predict(train_X, train_Y, test_X)
-    predict = predict.toarray()
-    print(type(predict))
-    print(predict.shape)
-    print(predict[:10, :10])
-    metric(test_Y, predict)
+    model_list = ["MLARAM", "MLkNN", "BRkNNa", "BRkNNb", "RF", "MLTSVM"]
+    for model in model_list:
+        predict = ML_model_predict(train_X, train_Y, test_X, model)
+        print(f"-------{model} model predict---------")
+        predict = predict.toarray()
+        print(type(predict))
+        print(predict.shape)
+        print(predict[:10, :10])
+        metric(test_Y, predict)
+        print("--------------------------------------")
