@@ -26,7 +26,7 @@ The proposed model consisted of a Graph Convolutional AutoEncoder Network (GCAN)
 
 | toolkit    | numpy  |pandas  |tensorflow |skmultilearn  |sklearn  |
 | ----------| -------| -------| ----------| -------------| --------| 
-| version number    | 1.16.3|1.0.3| 1.13.1| 0.2.0 | 0.21.2|
+| version number    | 1.16.3|1.0.3| 1.5| 0.2.0 | 0.21.2|
 
 ## Code instructions
 
