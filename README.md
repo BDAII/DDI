@@ -1,4 +1,4 @@
-# DDIS
+# Drug-drug interaction (DDI)
 The proposed model consisted of a Graph Convolutional AutoEncoder Network (GCAN) for embedding drug induced transcriptome data from the L1000 database of the Integrated Network-based Cellular Signatures (LINCS) project; and a Long Short-Term Memory network (LSTM) for DDI prediction. For a case study, we applied the proposed deep-learning model to antidiabetic agents.
 
 ## File directory structure
