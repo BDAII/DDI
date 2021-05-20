@@ -1,1 +1,2 @@
 # Drug-drug interaction (DDI)
+The data in this folder are the experimental data used in the study of Rohani N et al(https://www.nature.com/articles/s41598-019-50121-3) and are used as comparative experimental data for this study.

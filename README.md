@@ -3,6 +3,11 @@ The proposed model consisted of a Graph Convolutional AutoEncoder Network (GCAN)
 
 ## File directory structure
 <div>
+    <div style="float:left">/data/</div>
+    <div style="float:right">Folder for experimental data</div>
+</div>
+
+<div>
     <div style="float:left">/data_preprocessing/GCN/</div>
     <div style="float:right">use the GCN framework for data preprocessing</div>
 </div>
@@ -19,7 +24,7 @@ The proposed model consisted of a Graph Convolutional AutoEncoder Network (GCAN)
 
 <div>
     <div style="float:left">/result/</div>
-    <div style="float:right">result folder</div>
+    <div style="float:right">Folder for results</div>
 </div>
 
 ## The required toolkit support and verified version number for project execution
