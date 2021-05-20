@@ -3,50 +3,46 @@ The proposed model consists of a graph convolutional autoEncoder network (GCAN) 
 
 ## File directory structure
 <div>
-    <div style="float:left">"/data/" :</div><div style="float:right">Folder for experimental data</div>
+    <div style="float:left">"/data/"                  : folder of experiment data</div>
 </div>
 
 <div>
-    <div style="float:left">/data_preprocessing/GCN/</div>
-    <div style="float:right">use the GCN framework for data preprocessing</div>
+    <div style="float:left">"/data_preprocessing/GCAN/": use the GCAN framework for data preprocessing</div>
 </div>
 
 <div>
-    <div style="float:left">/model_train/LSTM_GCN/</div>
-    <div style="float:right">The LSTM + GCN framework code</div>
+    <div style="float:left">"/model_train/LSTM_GCAN/" : the GCAN + LSTM framework code</div>
 </div>
 
 <div>
-    <div style="float:left">/compare/</div>
-    <div style="float:right">six types of comparison model code</div>
+    <div style="float:left">"/compare/": six types of comparison model code </div>
 </div>
 
 <div>
-    <div style="float:left">/result/</div>
-    <div style="float:right">Folder for results</div>
+    <div style="float:left">"/result/": folder of results</div>
 </div>
 
 ## The required toolkit support and verified version number for project execution
 
 | toolkit    | numpy  |pandas  |tensorflow |skmultilearn  |sklearn  |
 | ----------| -------| -------| ----------| -------------| --------| 
-| version number    | 1.16.3|1.0.3| 1.5| 0.2.0 | 0.21.2|
+| version number    | 1.16.3|1.0.3| 1.13.1| 0.2.0 | 0.21.2|
 
 ## Code instructions
 
 1. data preprocessing
 
-   `inits.py Layer.py Model.py` ;Initialization of the GCN framework
+   `inits.py Layer.py Model.py` : initialization of the GCAN framework
    
-   `train.py` ;The GCN framework is used for data preprocessing
+   `train.py` : the GCAN framework is used for data preprocessing
     
 2. model training
    
-   `train_GEDDI_model.py param1 param2` ; use LSTM+GCN framework to train GEDDI model, param1:train data ;param2: test data
+   `train_GEDDI_model.py param1 param2` : use LSTM+GCAN framework to train model. param1: train data; param2: test data
 
 3. Compare the model
 
-   `compare_model.py param1 param2`  ;contrast models include "MLARAM", "MLkNN", "BRkNNa", "BRkNNb", "RF", "MLTSVM", param1:train data ;param2: test data
+   `compare_model.py param1 param2`  : contrast models include "MLARAM", "MLkNN", "BRkNNa", "BRkNNb", "RF", "MLTSVM". param1: train data; param2: test data
     
     
     
