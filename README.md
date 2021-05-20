@@ -3,7 +3,7 @@ The proposed model consists of a graph convolutional autoEncoder network (GCAN) 
 
 ## File directory structure
 <div>
-    <div style="float:left">"/data/"                  : folder of experiment data</div>
+    <div style="float:left">"/data/":&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;folder of experiment data</div>
 </div>
 
 <div>
@@ -11,15 +11,15 @@ The proposed model consists of a graph convolutional autoEncoder network (GCAN) 
 </div>
 
 <div>
-    <div style="float:left">"/model_train/GCAN_LSTM/" : the  GCAN + LSTM framework code</div>
+    <div style="float:left">"/model_train/GCAN_LSTM/" :&nbsp; the  GCAN + LSTM framework code</div>
 </div>
 
 <div>
-    <div style="float:left">"/compare/": six types of comparison model code </div>
+    <div style="float:left">"/compare/": &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp;six types of comparison model code </div>
 </div>
 
 <div>
-    <div style="float:left">"/result/": folder of results</div>
+    <div style="float:left">"/result/":&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; folder of results</div>
 </div>
 
 ## The required toolkit support and verified version number for project execution
@@ -43,6 +43,4 @@ The proposed model consists of a graph convolutional autoEncoder network (GCAN) 
 3. Compare the model
 
    `compare_model.py param1 param2`  : contrast models include "MLARAM", "MLkNN", "BRkNNa", "BRkNNb", "RF", "MLTSVM". param1: train data; param2: test data
-    
-    
-    
+  
