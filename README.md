@@ -3,8 +3,7 @@ The proposed model consists of a graph convolutional autoEncoder network (GCAN) 
 
 ## File directory structure
 <div>
-    <div style="float:left">/data/</div>
-    <div style="float:right">Folder for experimental data</div>
+    <div style="float:left">"/data/" :</div><div style="float:right">Folder for experimental data</div>
 </div>
 
 <div>
