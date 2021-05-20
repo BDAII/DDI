@@ -11,7 +11,7 @@ The proposed model consists of a graph convolutional autoEncoder network (GCAN) 
 </div>
 
 <div>
-    <div style="float:left">"/model_train/LSTM_GCAN/" : the  GCAN + LSTM framework code</div>
+    <div style="float:left">"/model_train/GCAN_LSTM/" : the  GCAN + LSTM framework code</div>
 </div>
 
 <div>
@@ -38,7 +38,7 @@ The proposed model consists of a graph convolutional autoEncoder network (GCAN) 
     
 2. model training
    
-   `train_GEDDI_model.py param1 param2` : use LSTM+GCAN framework to train model. param1: train data; param2: test data
+   `train_GEDDI_model.py param1 param2` : use GCAN + LSTM framework to train model. param1: train data; param2: test data
 
 3. Compare the model
 
